@@ -28,18 +28,29 @@ export const stats = [
 
 export const certs = ['ISO 22000', 'ISO 9001', 'HACCP', 'FDA', 'BRC', 'HALAL'];
 
-export const products = [
-  { brand: 'X-it', name: 'Sugar-Free Coffee Candy', tone: 'dark',
-    desc: 'The flagship coffee candy of X-it, the group\'s premium brand launched in 2022.',
-    badges: ['No.1 online sales in China*', 'Douyin 2024 Annual Treasure New Product'] },
-  { brand: 'X-it', name: 'Vitamin C Black Coffee Candy', tone: 'black',
-    desc: 'A sugar-free black coffee candy with vitamin C from the X-it range.', badges: ['Sugar-free'] },
-  { brand: "I'MINT", name: 'Gold Coffee Candy', tone: 'gold',
-    desc: "Coffee candy from I'MINT, the group's flagship brand founded in 2014.", badges: ['Flagship brand'] },
-  { brand: 'Rejee', name: 'Interstellar Sandwich Coffee Candy', tone: 'cream',
-    desc: 'A filled coffee candy from Rejee, the group\'s premium oral-care brand.', badges: ['Filled centre'] },
+export type Product = { brand: string; name: string; cn: string; img: string; desc: string; badges: string[]; featured?: boolean };
+// Product names, images and pack details taken from the Ruiji Food Group product catalogue (PDF).
+export const products: Product[] = [
+  { brand: 'X-it', name: 'Iced Coffee Candy', cn: '冰咖啡糖', img: 'xit-iced-coffee-candy', featured: true,
+    desc: 'X-it "Premium BonBons" coffee candy in a gold-rimmed tin.', badges: ['No.1 online sales nationwide*', 'Bestseller'] },
+  { brand: 'X-it', name: 'Sugar-Free Coffee Candy', cn: '无糖咖啡糖', img: 'xit-sugar-free-coffee-candy', featured: true,
+    desc: 'Sugar-free coffee candy with a new iced-coffee flavour profile, packed in a tin.', badges: ['Sugar-free', 'Iced coffee flavour'] },
+  { brand: 'X-it', name: 'VC Black Coffee Candy', cn: 'VC黑咖啡糖', img: 'xit-vc-black-coffee-candy', featured: true,
+    desc: 'Black coffee candy with vitamin C, in X-it "Premium BonBons" tins.', badges: ['Vitamin C'] },
+  { brand: "I'MINT", name: 'Gold Coffee Candy', cn: '黑金咖啡糖', img: 'imint-gold-coffee-candy', featured: true,
+    desc: 'Sugar-free coffee candy in a small square box, in Espresso and Americano variants — balanced bittersweet taste, not bitter or astringent.', badges: ['Sugar-free', 'Espresso', 'Americano'] },
+  { brand: 'X-it', name: '"Xing" Coffee Candy', cn: '"醒"咖啡糖', img: 'xit-xing-coffee-candy',
+    desc: 'Rich, full-bodied coffee candy in a round tin.', badges: ['Rich taste'] },
+  { brand: 'X-it', name: 'Reissue Series Coffee Candy', cn: '复刻系列咖啡糖', img: 'xit-reissue-coffee-candy',
+    desc: 'X-it Coffee Bonbons in a black-and-gold tin.', badges: ['Coffee Bonbons'] },
+  { brand: "I'MINT", name: 'Ginseng Americano Coffee Candy', cn: '人参美式咖啡糖', img: 'imint-ginseng-americano-coffee-candy',
+    desc: 'Americano coffee candy with ginseng and natural mint essence.', badges: ['Natural mint essence'] },
+  { brand: "I'MINT", name: 'VC Iced Coffee Candy', cn: 'VC冰咖啡糖', img: 'imint-vc-iced-coffee-candy',
+    desc: "Iced coffee candy with vitamin C from I'MINT, the group's flagship brand.", badges: ['Vitamin C'] },
+  { brand: "Rejee × I'MINT", name: 'Interstellar Sandwich Coffee Candy', cn: '星际夹心咖啡糖', img: 'rejee-interstellar-coffee-candy',
+    desc: 'Filled coffee candy in space-themed packs, including a lemon-VC Americano flavour.', badges: ['Filled centre', 'Lemon-VC Americano'] },
 ];
-export const claimNote = '*Proof of Market Position issued by Shangpu Consulting Group, May 2025 (data period: 2024), China online market.';
+export const claimNote = '*X-it coffee candy: Proof of Market Position issued by Shangpu Consulting Group, May 2025 (data period: 2024), China online market.';
 
 export const brands = [
   { name: "I'MINT", text: 'Flagship brand founded in 2014; listed in Guangdong Province\'s Key Trademark Protection Directory.' },
@@ -102,3 +113,12 @@ export const faqs = [
   ['How much can be supplied?', 'Annual capacity is 30,000 tonnes — about 50 million boxes per month.'],
   ['Which countries do you ship to?', 'Products are exported to 30+ countries and regions across Asia, Europe, the Americas, Oceania and the Middle East.'],
 ];
+
+export const gallery = {
+  factory: [
+    { img: 'factory-line-1', alt: 'Production line in the GMP cleanroom, Zhongshan headquarters', cap: 'GMP cleanroom production, Zhongshan HQ' },
+    { img: 'factory-line-2', alt: 'Automated packing line with operators in cleanroom suits', cap: 'Automated production lines' },
+    { img: 'packaging-factory', alt: 'Meixinlong packaging factory building', cap: 'Meixinlong packaging factory' },
+    { img: 'hq-office', alt: 'Open-plan office at Zhongshan Torch Zone headquarters', cap: 'Zhongshan Torch Zone headquarters' },
+  ],
+};

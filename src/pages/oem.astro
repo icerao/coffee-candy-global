@@ -11,6 +11,10 @@ const creds = ['Import & export rights', 'Export filing certificates', 'Foreign-
 <PageHero eyebrow="OEM & export" title="Private label and export supply, done properly." lead="Retail brands, hospitality groups and corporations already partner with Ruiji Food Group for OEM production — including MINISO, BESTORE, Three Squirrels, KKV and AEON." />
 <section class="section"><div class="wrap"><div class="head reveal"><span class="eyebrow">Cooperation models</span><h2>Ways to work together</h2></div>
   <div class="grid g4">{oemModels.map((m, i) => <div class="m reveal"><span>{String(i + 1).padStart(2, '0')}</span><h3>{m.t}</h3><p>{m.d}</p></div>)}</div></div></section>
+<section class="section"><div class="wrap">
+  <figure class="wide reveal"><img src="/images/oem-products.webp" alt="Collage of OEM and private-label confectionery produced by Ruiji Food Group for partner brands" loading="lazy" width="1600" height="696" /><figcaption>Selection of OEM / private-label products manufactured for partner brands.</figcaption></figure>
+  <div class="gb reveal"><img src="/images/gift-box.webp" alt="X-it Coffee Bonbons collector's gift box" loading="lazy" width="485" height="412" /><div><span class="eyebrow">Gift sets</span><h2>Gift box programmes</h2><p class="mut">The group produces gift box series across coffee, herbal, probiotic and seasonal themes — such as the X-it Coffee Bonbons collector's gift box — suitable for corporate gifting and festive retail.</p></div></div>
+</div></section>
 <section class="section cream"><div class="wrap"><div class="head reveal"><span class="eyebrow">Process</span><h2>How an order comes together</h2></div><Steps /></div></section>
 <section class="section"><div class="wrap two">
   <div class="reveal"><span class="eyebrow">Export credentials</span><h2>Complete export qualifications.</h2><p class="mut">Overseas OEM and export cooperation already spans Korea, Japan, Vietnam, Malaysia, the Philippines, Thailand and Singapore.</p></div>
@@ -22,6 +26,6 @@ const creds = ['Import & export rights', 'Export filing certificates', 'Foreign-
 <style>
 .m{padding:36px 30px;background:#fff;border:1px solid var(--line);border-radius:var(--r);transition:.3s}.m:hover{border-color:var(--gold-2);transform:translateY(-4px)}
 .m span{font-family:var(--serif);font-size:2.4rem;color:var(--gold)}.m h3{color:var(--coffee);margin:14px 0 10px}.m p{color:var(--muted);font-size:.95rem;margin:0}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}.mut{color:var(--muted);margin-top:20px}@media(max-width:860px){.two{grid-template-columns:1fr;gap:24px}}
+.wide{margin:0 0 72px}.wide img{width:100%;border-radius:var(--r);border:1px solid var(--line)}.wide figcaption{font-size:.85rem;color:var(--muted);margin-top:12px}.gb{display:grid;grid-template-columns:1fr 1.3fr;gap:56px;align-items:center}.gb img{width:100%;border-radius:var(--r)}@media(max-width:860px){.gb{grid-template-columns:1fr;gap:28px}}.two{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}.mut{color:var(--muted);margin-top:20px}@media(max-width:860px){.wide{margin:0 0 72px}.wide img{width:100%;border-radius:var(--r);border:1px solid var(--line)}.wide figcaption{font-size:.85rem;color:var(--muted);margin-top:12px}.gb{display:grid;grid-template-columns:1fr 1.3fr;gap:56px;align-items:center}.gb img{width:100%;border-radius:var(--r)}@media(max-width:860px){.gb{grid-template-columns:1fr;gap:28px}}.two{grid-template-columns:1fr;gap:24px}}
 .cr{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:16px}.cr li{padding:22px;border:1px solid var(--line);background:#fff;border-radius:var(--r);font-weight:500;color:var(--coffee)}@media(max-width:520px){.cr{grid-template-columns:1fr}}
 </style>

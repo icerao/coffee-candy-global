@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import Stats from '../components/Stats.astro';
 import CertStrip from '../components/CertStrip.astro';
 import Cta from '../components/Cta.astro';
-import { milestones, experts } from '../data/site';
+import { milestones, experts, gallery } from '../data/site';
 const sub = [['#overview', 'Overview'], ['#factory', 'Factory'], ['#quality', 'Quality'], ['#rnd', 'R&D'], ['#history', 'Milestones']];
 const awards = ['High-Tech Enterprise (Guangdong & Henan)', 'China National Confectionery Association member', 'Guangdong Famous Food Brand product', 'X-it trademark registered with EUIPO', '2025 New York, France, London & MUSE packaging-design awards', 'Alibaba.com three-star verified supplier', 'Intertek verified supplier certificate', 'Annual audits by international companies such as Disney'];
 ---
@@ -16,14 +16,20 @@ const awards = ['High-Tech Enterprise (Guangdong & Henan)', 'China National Conf
   <div class="txt"><p>Ruiji Food Group pioneered large-scale production of sugar-free candy in China. Its brands — I'MINT, X-it, Rejee and KISS PEARL — offer 200+ products sold through e-commerce, offline retail, OEM and export channels.</p><p>Products reach 500,000+ retail outlets in China through 1,000+ distribution partners, and are exported to 30+ countries and regions. In 2025, group sales exceeded RMB 1.3 billion.</p></div>
 </div></section>
 <section class="section dark" id="factory"><div class="wrap"><div class="head reveal"><span class="eyebrow">Smart manufacturing</span><h2>Factory & supply chain</h2><p>A self-built supply chain, proprietary core processes, automated production and Class 100,000 GMP cleanrooms, supported by a digital R&D laboratory.</p></div><Stats />
+  <div class="gal">{gallery.factory.map((g) => <figure class="reveal"><img src={`/images/${g.img}.webp`} alt={g.alt} loading="lazy" width="600" height="420" /><figcaption>{g.cap}</figcaption></figure>)}</div>
   <div class="grid g3 fac">{[['Zhongshan Torch Zone HQ', 'Opened 2025 — intelligent production lines, digital R&D center and supply-chain hub.'], ['Meixinlong packaging factory', 'In-house packaging production within the group.'], ['Nanyang plant', 'Additional production base.']].map(([t, d]) => <div class="reveal"><h3>{t}</h3><p>{d}</p></div>)}</div>
 </div></section>
 <CertStrip />
 <section class="section" id="quality"><div class="wrap two">
   <div class="reveal"><span class="eyebrow">Quality & credentials</span><h2>Internationally recognised quality systems.</h2></div>
-  <ul class="aw">{awards.map((a) => <li class="reveal">{a}</li>)}</ul>
+  <div><ul class="aw">{awards.map((a) => <li class="reveal">{a}</li>)}</ul>
+  <figure class="cert reveal"><img src="/images/certificates.webp" alt="Selection of Ruiji Food Group certificates and awards" loading="lazy" width="1021" height="1200" /><figcaption>Certificates and awards, from the group's company profile.</figcaption></figure></div>
 </div></section>
-<section class="section cream" id="rnd"><div class="wrap"><div class="head reveal"><span class="eyebrow">Research & development</span><h2>Led by experienced confectionery scientists.</h2></div>
+<section class="section cream"><div class="wrap two reveal">
+  <img class="rd" src="/images/retail-display.webp" alt="Ruiji Food Group branded retail display stand" loading="lazy" width="925" height="1000" />
+  <div><span class="eyebrow">In retail</span><h2>On shelves across 500,000+ outlets.</h2><p class="mut">Ruiji products are stocked in China through 1,000+ distribution partners, including Watsons, CR Vanguard, KKV, AEON and major snack-retail and discount chains.</p></div>
+</div></section>
+<section class="section" id="rnd"><div class="wrap"><div class="head reveal"><span class="eyebrow">Research & development</span><h2>Led by experienced confectionery scientists.</h2></div>
   <div class="grid g3">{experts.map((e) => <div class="ex reveal"><span class="mono" aria-hidden="true">{e.n.replace('Dr. ', '').split(' ').map((w) => w[0]).join('')}</span><h3>{e.n}</h3><span class="role">{e.r}</span><p>{e.d}</p></div>)}</div></div></section>
 <section class="section" id="history"><div class="wrap"><div class="head reveal"><span class="eyebrow">Milestones</span><h2>A decade of sugar-free growth.</h2></div>
   <ol class="tl">{milestones.map(([y, t]) => <li class="reveal"><b>{y}</b><p>{t}</p></li>)}</ol></div></section>
@@ -34,7 +40,7 @@ const awards = ['High-Tech Enterprise (Guangdong & Henan)', 'China National Conf
 .subnav a{flex:none;text-decoration:none;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:18px 0;border-bottom:2px solid transparent;transition:.2s}.subnav a:hover,.subnav :global(a.on){color:var(--coffee);border-color:var(--gold)}
 section[id]{scroll-margin-top:140px}
 .two{display:grid;grid-template-columns:1fr 1.1fr;gap:72px}.txt p{color:var(--muted);font-size:1.08rem}@media(max-width:860px){.two{grid-template-columns:1fr;gap:24px}}
-.fac{margin-top:56px}.fac h3{color:#fff;margin-bottom:8px;padding-top:20px;border-top:1px solid var(--gold)}.fac p{color:#cdbfae}
+.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}.gal figure{margin:0}.gal img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r)}.gal figcaption{font-size:.8rem;color:#cdbfae;margin-top:10px}@media(max-width:860px){.gal{grid-template-columns:1fr 1fr}}.cert{margin:36px 0 0}.cert img{width:100%;border:1px solid var(--line);border-radius:var(--r)}.cert figcaption,.mut{color:var(--muted);font-size:.85rem;margin-top:10px}.mut{font-size:1.05rem;margin-top:18px}.rd{width:100%;max-width:460px;border-radius:var(--r)}.fac{margin-top:56px}.fac h3{color:#fff;margin-bottom:8px;padding-top:20px;border-top:1px solid var(--gold)}.fac p{color:#cdbfae}
 .aw{list-style:none;margin:0;padding:0}.aw li{padding:18px 0 18px 36px;border-bottom:1px solid var(--line);position:relative;font-size:1.02rem}.aw li::before{content:'';position:absolute;left:4px;top:27px;width:14px;height:1px;background:var(--gold)}
 .ex{background:#fff;padding:36px;border:1px solid var(--line);border-radius:var(--r)}.mono{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--coffee);color:var(--gold-2);font-family:var(--serif);font-size:1.4rem;margin-bottom:22px}
 .ex h3{color:var(--coffee)}.role{display:block;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:6px 0 14px;font-weight:600}.ex p{color:var(--muted);font-size:.95rem;margin:0}

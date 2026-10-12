@@ -2,20 +2,13 @@
 import { markets } from '../data/site';
 ---
 <div class="mk">
-  <svg class="globe" viewBox="0 0 400 400" aria-hidden="true">
-    <circle cx="200" cy="200" r="180" fill="none" stroke="#d8b37a" stroke-opacity=".5" />
-    {[60, 120].map((rx) => <ellipse cx="200" cy="200" rx={rx} ry="180" fill="none" stroke="#d8b37a" stroke-opacity=".25" />)}
-    {[-120, -60, 0, 60, 120].map((y) => <ellipse cx="200" cy={200 + y} rx={Math.sqrt(180 * 180 - y * y)} ry="1" fill="none" stroke="#d8b37a" stroke-opacity=".25" />)}
-    <circle cx="268" cy="168" r="7" fill="#d8b37a" /><circle cx="268" cy="168" r="16" fill="none" stroke="#d8b37a" class="pulse" />
-    {[[120,140],[150,120],[96,180],[300,120],[310,220],[250,250],[180,150],[330,170]].map(([x, y]) => <g><path d={`M268 168 Q${(268 + x) / 2} ${Math.min(168, y) - 50} ${x} ${y}`} fill="none" stroke="#d8b37a" stroke-opacity=".5" stroke-dasharray="3 4" /><circle cx={x} cy={y} r="3.5" fill="#fff" /></g>)}
-  </svg>
   <div class="list">{markets.map((m) => <div class="reveal"><h3>{m.region}</h3><p>{m.list.join(' · ')}</p></div>)}
     <p class="more">…and more — 30+ countries and regions in total.</p></div>
 </div>
 <style>
-.mk{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:center}.globe{width:100%;max-width:420px}
-.pulse{transform-origin:268px 168px;animation:p 2.4s ease-out infinite}@keyframes p{from{transform:scale(.6);opacity:1}to{transform:scale(2.2);opacity:0}}
-.list{display:grid;grid-template-columns:1fr 1fr;gap:28px 40px}.list h3{color:#fff;font-size:1.4rem;margin-bottom:6px;padding-bottom:10px;border-bottom:1px solid #ffffff1f}.list p{color:#cdbfae;font-size:.95rem;margin:0}
+.mk{display:block}
+
+.list{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 40px}.list h3{color:#fff;font-size:1.4rem;margin-bottom:6px;padding-bottom:10px;border-bottom:1px solid #ffffff1f}.list p{color:#cdbfae;font-size:.95rem;margin:0}
 .more{grid-column:1/-1;color:var(--gold-2)!important;font-style:italic;font-family:var(--serif);font-size:1.2rem!important}
-@media(max-width:860px){.mk{grid-template-columns:1fr}.globe{max-width:300px;margin:auto}}@media(max-width:520px){.list{grid-template-columns:1fr}}
+@media(max-width:860px){.list{grid-template-columns:1fr 1fr}}@media(max-width:520px){.list{grid-template-columns:1fr}}
 </style>

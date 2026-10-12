@@ -7,9 +7,14 @@ import Cta from '../components/Cta.astro';
 import { products, brands, claimNote } from '../data/site';
 ---
 <Base title="Coffee Candy Products" description="Sugar-free coffee candy from X-it, I'MINT and Rejee by Ruiji Food Group — available for wholesale, distribution and private label.">
-<PageHero eyebrow="Products" title="Sugar-free coffee candy range" lead="Representative coffee candy products from Ruiji Food Group's brands. Specifications, shelf life, packaging options and MOQ are provided on request." />
+<PageHero eyebrow="Products" title="Sugar-free coffee candy range" lead="Nine coffee candy products from Ruiji Food Group's brands. Specifications, shelf life, packaging options and MOQ are provided on request." />
 <CertStrip />
-<section class="section"><div class="wrap"><div class="grid g4">{products.map((p) => <ProductCard p={p} />)}</div><p class="fn">{claimNote}</p></div></section>
+<section class="section"><div class="wrap"><div class="grid g3">{products.map((p) => <ProductCard p={p} />)}</div><p class="fn">{claimNote}</p></div></section>
+<section class="section cream"><div class="wrap proof">
+  <div class="reveal"><span class="eyebrow">Market proof</span><h2>X-it coffee candy: No.1 in online sales nationwide.</h2><p class="mut">Proof of Market Position issued by Shangpu Consulting Group in May 2025 (data period: 2024). X-it also won Douyin's 2024 "Annual Treasure New Product" award.</p></div>
+  <img class="reveal" src="/images/xit-coffee-certificate.webp" alt="Shangpu Consulting Group Proof of Market Position certificate for X-it coffee candy" loading="lazy" width="513" height="800" />
+  <img class="reveal" src="/images/xit-award.webp" alt="Douyin 2024 Annual Treasure New Product award for X-it" loading="lazy" width="465" height="800" />
+</div></section>
 <section class="section cream"><div class="wrap">
   <div class="head reveal"><span class="eyebrow">Brand portfolio</span><h2>Four brands, one sugar-free focus.</h2><p>The group's portfolio spans 200+ products including mints, chewing gum, coffee candy, herbal lozenges, probiotic tablets and soft candy.</p></div>
   <div class="grid g4">{brands.map((b) => <div class="br reveal"><h3>{b.name}</h3><p>{b.text}</p></div>)}</div>
@@ -21,6 +26,7 @@ import { products, brands, claimNote } from '../data/site';
 <Cta />
 </Base>
 <style>
+.proof{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:32px;align-items:center}.proof img{width:100%;border-radius:var(--r);box-shadow:0 20px 40px -24px #3a241660}.mut{color:var(--muted);margin-top:18px}@media(max-width:860px){.proof{grid-template-columns:1fr 1fr}.proof>div{grid-column:1/-1}}
 .fn{font-size:.8rem;color:var(--muted);margin-top:28px}.br{border-top:2px solid var(--gold);padding-top:24px}.br h3{color:var(--coffee);font-size:1.7rem;margin-bottom:10px}.br p{color:var(--muted);font-size:.95rem}
 .info{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end}.info p{color:var(--muted);font-size:1.08rem;margin-bottom:28px}@media(max-width:860px){.info{grid-template-columns:1fr;gap:20px}}
 </style>
