@@ -1,0 +1,29 @@
+---
+import { c } from '../i18n/content';
+const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const canonical = site + '/';
+const ld = { '@context': 'https://schema.org', '@type': 'Organization', name: 'Ruiji Food Group', foundingDate: '2014', address: { '@type': 'PostalAddress', addressLocality: 'Zhongshan', addressRegion: 'Guangdong', addressCountry: 'CN' }, email: 'raolh2004@gmail.com', description: 'Authorized export representative of Ruiji Food Group', brand: ["I'MINT", 'X-it', 'Rejee', 'KISS PEARL'] };
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{c.meta.title}</title>
+<meta name="description" content={c.meta.desc} />
+<meta name="keywords" content="sugar-free coffee candy, coffee candy wholesale, coffee candy OEM, private label candy, China candy manufacturer, X-it, I'MINT" />
+<link rel="canonical" href={canonical} />
+<meta property="og:type" content="website" /><meta property="og:title" content={c.meta.title} /><meta property="og:description" content={c.meta.desc} /><meta property="og:url" content={canonical} />
+<meta name="twitter:card" content="summary" />
+<meta name="theme-color" content="#3b2314" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<script type="application/ld+json" set:html={JSON.stringify(ld)} />
+</head>
+<body><slot /></body>
+</html>
+<style is:global>
+:root{--dk:#2a180d;--br:#4a2c1a;--cr:#f7efe4;--gd:#c8915a;--tx:#2b2118}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--tx);background:#fffaf4;line-height:1.6}
+a{color:inherit}.wrap{max-width:1140px;margin:auto;padding:0 20px}section{padding:72px 0}h2{font-size:clamp(1.6rem,3vw,2.3rem);margin:0 0 8px;color:var(--br)}.sub{color:#6b5848;margin:0 0 32px}
+.btn{display:inline-block;padding:13px 24px;border-radius:999px;font-weight:600;text-decoration:none;border:0;cursor:pointer;font-size:1rem}.btn-gd{background:var(--gd);color:#fff}.btn-ol{border:2px solid #fff;color:#fff}
+.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.card{background:#fff;border:1px solid #eadccb;border-radius:16px;padding:24px;box-shadow:0 4px 16px #4a2c1a0d}.card h3{margin:0 0 8px;color:var(--br)}
+</style>
