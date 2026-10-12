@@ -1,29 +1,100 @@
 ---
-import { c } from '../i18n/content';
+import '../styles/global.css';
+import Icon from '../components/Icon.astro';
+import { nav, rep } from '../data/site';
+interface Props { title: string; description: string }
+const { title, description } = Astro.props;
 const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
-const canonical = site + '/';
-const ld = { '@context': 'https://schema.org', '@type': 'Organization', name: 'Ruiji Food Group', foundingDate: '2014', address: { '@type': 'PostalAddress', addressLocality: 'Zhongshan', addressRegion: 'Guangdong', addressCountry: 'CN' }, email: 'raolh2004@gmail.com', description: 'Authorized export representative of Ruiji Food Group', brand: ["I'MINT", 'X-it', 'Rejee', 'KISS PEARL'] };
+const path = Astro.url.pathname;
+const canonical = site + path;
+const fullTitle = `${title} | Ruiji Food Group Coffee Candy – Authorized Export Representative`;
+const ld = { '@context': 'https://schema.org', '@type': 'Organization', name: 'Ruiji Food Group – Authorized Export Representative (icerao)', email: rep.email, url: site + '/', description: 'Authorized export representative of Ruiji Food Group, China, for sugar-free coffee candy wholesale and OEM.', address: { '@type': 'PostalAddress', addressLocality: 'Zhongshan', addressRegion: 'Guangdong', addressCountry: 'CN' } };
+const isActive = (h: string) => (h === '/' ? path === '/' : path.startsWith(h));
 ---
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>{c.meta.title}</title>
-<meta name="description" content={c.meta.desc} />
-<meta name="keywords" content="sugar-free coffee candy, coffee candy wholesale, coffee candy OEM, private label candy, China candy manufacturer, X-it, I'MINT" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
-<meta property="og:type" content="website" /><meta property="og:title" content={c.meta.title} /><meta property="og:description" content={c.meta.desc} /><meta property="og:url" content={canonical} />
-<meta name="twitter:card" content="summary" />
-<meta name="theme-color" content="#3b2314" />
+<meta property="og:type" content="website" /><meta property="og:title" content={fullTitle} /><meta property="og:description" content={description} /><meta property="og:url" content={canonical} />
+<meta name="twitter:card" content="summary" /><meta name="theme-color" content="#3a2416" />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" />
 <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 </head>
-<body><slot /></body>
-</html>
-<style is:global>
-:root{--dk:#2a180d;--br:#4a2c1a;--cr:#f7efe4;--gd:#c8915a;--tx:#2b2118}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--tx);background:#fffaf4;line-height:1.6}
-a{color:inherit}.wrap{max-width:1140px;margin:auto;padding:0 20px}section{padding:72px 0}h2{font-size:clamp(1.6rem,3vw,2.3rem);margin:0 0 8px;color:var(--br)}.sub{color:#6b5848;margin:0 0 32px}
-.btn{display:inline-block;padding:13px 24px;border-radius:999px;font-weight:600;text-decoration:none;border:0;cursor:pointer;font-size:1rem}.btn-gd{background:var(--gd);color:#fff}.btn-ol{border:2px solid #fff;color:#fff}
-.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.card{background:#fff;border:1px solid #eadccb;border-radius:16px;padding:24px;box-shadow:0 4px 16px #4a2c1a0d}.card h3{margin:0 0 8px;color:var(--br)}
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr" id="hdr">
+  <div class="wrap bar">
+    <a href="/" class="logo" aria-label="Home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1" /><ellipse cx="20" cy="20" rx="8" ry="12" transform="rotate(28 20 20)" fill="none" stroke="#b8894d" stroke-width="1.6" /><path d="M16 10q8 9 6 20" transform="rotate(10 20 20)" stroke="#b8894d" stroke-width="1.6" fill="none" /></svg>
+      <span><b>RUIJI COFFEE CANDY</b><small>Authorized Export Representative</small></span>
+    </a>
+    <nav id="menu" aria-label="Main">
+      <ul>{nav.map((n) => <li><a href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a></li>)}</ul>
+      <a class="btn btn-gold quote" href="/contact/">Request a quote</a>
+    </nav>
+    <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<main id="main"><slot /></main>
+<footer class="ftr">
+  <div class="wrap cols">
+    <div class="about"><b class="fl">RUIJI COFFEE CANDY</b><p>Sugar-free coffee candy for importers, distributors and private-label partners worldwide. Represented by {rep.name}, authorized export representative of Ruiji Food Group, China.</p></div>
+    <div><h4>Explore</h4><ul>{nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul></div>
+    <div><h4>Manufacturer</h4><ul><li>Ruiji Food Group</li><li>Torch Development Zone</li><li>Zhongshan, Guangdong, China</li></ul></div>
+    <div><h4>Contact</h4><ul><li>{rep.name}</li><li><a href={`mailto:${rep.email}`}>{rep.email}</a></li></ul></div>
+  </div>
+  <div class="wrap legal"><span>© {new Date().getFullYear()} {rep.name} · Authorized export representative of Ruiji Food Group.</span><span>I'MINT, X-it, Rejee and other brand names belong to their respective owners.</span></div>
+</footer>
+<button class="top" id="top" aria-label="Back to top"><Icon name="up" /></button>
+<script>
+const hdr = document.getElementById('hdr')!, top = document.getElementById('top')!, burger = document.querySelector('.burger')!;
+const onScroll = () => { const y = scrollY; hdr.classList.toggle('solid', y > 24); top.classList.toggle('show', y > 600); };
+addEventListener('scroll', onScroll, { passive: true }); onScroll();
+top.addEventListener('click', () => scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
+burger.addEventListener('click', () => { const o = document.body.classList.toggle('nav-open'); burger.setAttribute('aria-expanded', String(o)); burger.setAttribute('aria-label', o ? 'Close menu' : 'Open menu'); });
+document.querySelectorAll('#menu a').forEach((a) => a.addEventListener('click', () => document.body.classList.remove('nav-open')));
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const count = (el: HTMLElement) => {
+  const n = +el.dataset.count!, sfx = el.dataset.suffix || '', plain = !!el.dataset.plain, t0 = performance.now(), dur = 1600;
+  const fmt = (v: number) => (plain ? String(v) : v.toLocaleString('en-US')) + sfx;
+  if (reduce) return (el.textContent = fmt(n));
+  const step = (t: number) => { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(Math.round((plain ? 1990 + (n - 1990) * e : n * e))); if (k < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+};
+const io = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) return; e.target.classList.add('in'); e.target.querySelectorAll<HTMLElement>('[data-count]').forEach(count); io.unobserve(e.target); }), { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+// active-section highlight for in-page sub-nav
+const links = [...document.querySelectorAll<HTMLAnchorElement>('.subnav a')];
+if (links.length) {
+  const so = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((l) => l.classList.toggle('on', l.hash === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+  links.forEach((l) => { const s = document.querySelector(l.hash); if (s) so.observe(s); });
+}
+</script>
+<style>
+.hdr{position:fixed;inset:0 0 auto;z-index:50;color:#fff;transition:background .35s,box-shadow .35s,padding .35s;padding:10px 0}
+.hdr.solid,.nav-open .hdr{background:#1f140cf2;backdrop-filter:blur(10px);box-shadow:0 1px 0 #ffffff14;padding:0}
+.bar{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}.logo svg{width:40px;height:40px}.logo b{display:block;font-family:var(--serif);font-weight:600;font-size:1.15rem;letter-spacing:.14em}.logo small{display:block;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-2)}
+nav{display:flex;align-items:center;gap:36px}nav ul{list-style:none;margin:0;padding:0;display:flex;gap:30px}
+nav ul a{text-decoration:none;font-size:.82rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:8px 0;position:relative;opacity:.85;transition:opacity .2s}
+nav ul a::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--gold-2);transform:scaleX(0);transition:transform .3s;transform-origin:left}
+nav ul a:hover,nav ul a[aria-current]{opacity:1}nav ul a:hover::after,nav ul a[aria-current]::after{transform:scaleX(1)}
+.quote{padding:12px 20px;font-size:.74rem}
+.burger{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;position:relative}.burger span{position:absolute;left:10px;right:10px;height:1.5px;background:#fff;transition:.3s}.burger span:nth-child(1){top:15px}.burger span:nth-child(2){top:21px}.burger span:nth-child(3){top:27px}
+.nav-open .burger span:nth-child(1){transform:translateY(6px) rotate(45deg)}.nav-open .burger span:nth-child(2){opacity:0}.nav-open .burger span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+@media(max-width:1020px){.burger{display:block}nav{position:fixed;inset:76px 0 auto;background:#1f140c;flex-direction:column;align-items:stretch;gap:0;padding:12px 28px 32px;transform:translateY(-8px);opacity:0;visibility:hidden;transition:.3s}
+.nav-open nav{opacity:1;visibility:visible;transform:none}nav ul{flex-direction:column;gap:0}nav ul a{display:block;padding:18px 0;border-bottom:1px solid #ffffff14;font-size:.9rem}nav ul a::after{display:none}nav ul a[aria-current]{color:var(--gold-2)}.quote{margin-top:24px;justify-content:center}}
+.ftr{background:#170e08;color:#a8998a;padding:88px 0 32px;font-size:.92rem}.cols{display:grid;grid-template-columns:2fr 1fr 1.2fr 1.3fr;gap:48px}
+.fl{font-family:var(--serif);color:#fff;font-size:1.3rem;letter-spacing:.14em;font-weight:500}.about p{margin-top:16px;max-width:360px}
+h4{color:#fff;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;margin:0 0 18px;font-weight:600}.ftr ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}.ftr a{text-decoration:none}.ftr a:hover{color:var(--gold-2)}
+.legal{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid #ffffff14;margin-top:64px;padding-top:28px;font-size:.8rem}
+@media(max-width:860px){.cols{grid-template-columns:1fr 1fr}.about{grid-column:1/-1}}
+.top{position:fixed;right:24px;bottom:24px;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:var(--paper);color:var(--coffee);cursor:pointer;opacity:0;visibility:hidden;transform:translateY(10px);transition:.3s;z-index:40}.top.show{opacity:1;visibility:visible;transform:none}.top:hover{background:var(--gold);color:#fff}.top :global(svg){width:20px;margin:auto}
 </style>
+</body>
+</html>

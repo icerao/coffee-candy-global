@@ -1,0 +1,12 @@
+---
+import { stats } from '../data/site';
+---
+<div class="stats grid g3">
+  {stats.map((s) => <div class="stat reveal"><b data-count={s.n} data-suffix={s.suffix} data-plain={s.plain ? '1' : ''}>{s.plain ? s.n : s.n.toLocaleString('en-US')}{s.suffix}</b><span>{s.label}</span></div>)}
+</div>
+<style>
+.stats{gap:0}.stat{padding:36px 28px;border-left:1px solid #ffffff1f}.stat:nth-child(3n+1){border-left:0}
+.stat b{display:block;font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem,5vw,3.6rem);color:var(--gold-2);line-height:1}
+.stat span{display:block;margin-top:12px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:#cdbfae}
+@media(max-width:960px){.stat{border-left:0;border-top:1px solid #ffffff1f}}
+</style>

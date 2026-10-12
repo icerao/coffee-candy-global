@@ -1,0 +1,11 @@
+---
+interface Props { name: 'arrow' | 'check' | 'mail' | 'shield' | 'factory' | 'leaf' | 'globe' | 'plus' | 'up' }
+const { name } = Astro.props;
+const p: Record<string, string> = {
+  arrow: 'M5 12h14M13 6l6 6-6 6', check: 'M5 12l5 5L20 7', mail: 'M3 6h18v12H3zM3 7l9 6 9-6',
+  shield: 'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z M8.5 12l2.5 2.5 4.5-5', factory: 'M3 21V10l6 4V10l6 4V6h6v15z M7 18h2M12 18h2M17 18h2',
+  leaf: 'M5 19C5 9 11 4 20 4c0 9-5 15-15 15z M5 19L13 11', globe: 'M12 3a9 9 0 100 18 9 9 0 000-18z M3 12h18 M12 3c3 3 3 15 0 18 M12 3c-3 3-3 15 0 18',
+  plus: 'M12 5v14M5 12h14', up: 'M12 19V5M6 11l6-6 6 6',
+};
+---
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={p[name]} /></svg>

@@ -24,5 +24,5 @@ If no form endpoint is set, the inquiry form opens the visitor's email app with 
 Push to GitHub, then "Import Project" in Vercel. Astro is auto-detected (build `npm run build`, output `dist`) — zero config.
 
 ## Edit content
-All text is in `src/i18n/content.ts`. Page layout: `src/components/Page.astro`.
+All facts and copy live in `src/data/site.ts`; pages in `src/pages/` (Home, Products, About, OEM, Contact) share `src/layouts/Base.astro`. Reusable UI is in `src/components/`. `vercel.json` pins framework=astro, build `npm run build`, output `dist`.
 Content comes from the 2026 company profile; see doc section 4 for claims to verify (e.g. "No.1" claims, certificate validity) before publishing.

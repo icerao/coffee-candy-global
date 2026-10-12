@@ -1,0 +1,13 @@
+---
+import { faqs } from '../data/site';
+---
+<div class="faq">
+  {faqs.map(([q, a]) => <details class="reveal"><summary><span>{q}</span><i aria-hidden="true"></i></summary><div class="a"><p>{a}</p></div></details>)}
+</div>
+<style>
+details{border-bottom:1px solid var(--line)}details:first-child{border-top:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:26px 0;font-family:var(--serif);font-size:1.4rem;color:var(--coffee)}
+summary::-webkit-details-marker{display:none}
+i{flex:none;width:28px;height:28px;border:1px solid var(--gold);border-radius:50%;position:relative}i::before,i::after{content:'';position:absolute;inset:50% 7px auto;height:1px;background:var(--gold);transition:transform .3s}i::after{transform:rotate(90deg)}
+details[open] i::after{transform:rotate(0)}.a p{color:var(--muted);max-width:760px;padding-bottom:24px;margin:0}
+</style>

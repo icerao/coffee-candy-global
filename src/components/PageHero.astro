@@ -1,0 +1,10 @@
+---
+interface Props { eyebrow: string; title: string; lead?: string }
+const { eyebrow, title, lead } = Astro.props;
+---
+<section class="ph"><div class="wrap"><span class="eyebrow">{eyebrow}</span><h1>{title}</h1>{lead && <p>{lead}</p>}</div></section>
+<style>
+.ph{background:linear-gradient(160deg,var(--coffee),var(--ink));color:#fff;padding:clamp(140px,16vw,200px) 0 clamp(64px,8vw,96px);position:relative;overflow:hidden}
+.ph::after{content:'';position:absolute;right:-120px;top:-120px;width:480px;height:480px;border:1px solid #b8894d33;border-radius:50%;box-shadow:0 0 0 60px #b8894d0d,0 0 0 120px #b8894d08}
+.ph h1{max-width:820px}.ph p{max-width:640px;color:#d9ccbb;font-size:1.12rem;margin-top:22px}
+</style>

@@ -1,0 +1,14 @@
+---
+import Icon from './Icon.astro';
+import { rep } from '../data/site';
+---
+<section class="cta"><div class="wrap in reveal">
+  <div><span class="eyebrow">Start sourcing</span><h2>Ready to stock sugar-free coffee candy?</h2>
+  <p>Tell us your market and volume. {rep.name}, our authorized export representative of Ruiji Food Group, will respond with options and a quotation.</p></div>
+  <div class="acts"><a class="btn btn-gold" href="/contact/">Send an inquiry <Icon name="arrow" /></a><a class="link" href={`mailto:${rep.email}`}>{rep.email}</a></div>
+</div></section>
+<style>
+.cta{background:var(--ink);color:#e9dfd2;padding:clamp(72px,9vw,112px) 0}.in{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:end}
+h2{color:#fff;margin-bottom:16px}p{color:#bfb09f;max-width:560px;margin:0}.acts{display:flex;flex-direction:column;align-items:flex-start;gap:22px}
+@media(max-width:860px){.in{grid-template-columns:1fr}}
+</style>

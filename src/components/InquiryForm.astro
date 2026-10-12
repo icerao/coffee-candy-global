@@ -1,0 +1,61 @@
+---
+import Icon from './Icon.astro';
+import { rep } from '../data/site';
+---
+<form id="inq" class="form" novalidate data-endpoint={rep.formEndpoint} data-key={rep.web3formsKey} data-email={rep.email}>
+  <div class="row2">
+    <div class="f"><label for="f-name">Full name *</label><input id="f-name" name="name" autocomplete="name" required /><small>Please enter your name.</small></div>
+    <div class="f"><label for="f-company">Company *</label><input id="f-company" name="company" autocomplete="organization" required /><small>Please enter your company.</small></div>
+  </div>
+  <div class="row2">
+    <div class="f"><label for="f-email">Business email *</label><input id="f-email" type="email" name="email" autocomplete="email" required /><small>Please enter a valid email.</small></div>
+    <div class="f"><label for="f-country">Country / region *</label><input id="f-country" name="country" autocomplete="country-name" required /><small>Please enter your country.</small></div>
+  </div>
+  <div class="row2">
+    <div class="f"><label for="f-type">Business type</label><select id="f-type" name="business_type"><option>Importer / Distributor</option><option>Retail chain</option><option>Private label / OEM</option><option>Hospitality / Gifting</option><option>E-commerce</option><option>Other</option></select></div>
+    <div class="f"><label for="f-qty">Estimated quantity</label><input id="f-qty" name="quantity" placeholder="e.g. 1 x 20ft container" /></div>
+  </div>
+  <div class="f"><label for="f-msg">Message *</label><textarea id="f-msg" name="message" rows="5" required minlength="10" placeholder="Products of interest, packaging, target market, timeline…"></textarea><small>Please add a short message (10+ characters).</small></div>
+  <input type="checkbox" name="botcheck" class="sr" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  <div class="submit"><button class="btn btn-dark" type="submit">Submit inquiry <Icon name="arrow" /></button><span class="note">Your details are sent only to {rep.email}.</span></div>
+  <p class="err" role="alert" hidden>Sending failed. Your email app will open with the inquiry instead.</p>
+</form>
+<div id="inq-ok" class="ok" hidden tabindex="-1">
+  <span class="tick"><Icon name="check" /></span><h3>Thank you — inquiry received</h3>
+  <p id="inq-ok-msg">We will reply to your email shortly.</p>
+</div>
+<script>
+const f = document.getElementById('inq') as HTMLFormElement | null;
+if (f) {
+  const ok = document.getElementById('inq-ok')!, okMsg = document.getElementById('inq-ok-msg')!, err = f.querySelector('.err') as HTMLElement;
+  const fields = [...f.querySelectorAll<HTMLInputElement>('[required]')];
+  const check = (el: HTMLInputElement) => { const bad = !el.checkValidity(); el.closest('.f')!.classList.toggle('bad', bad); el.setAttribute('aria-invalid', String(bad)); return !bad; };
+  fields.forEach((el) => el.addEventListener('blur', () => check(el)));
+  f.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const valid = fields.map(check).every(Boolean);
+    if (!valid) { (f.querySelector('.bad input, .bad textarea') as HTMLElement)?.focus(); return; }
+    const fd = new FormData(f); if (fd.get('botcheck')) return; fd.delete('botcheck');
+    const d = f.dataset, subject = `Coffee candy inquiry – ${fd.get('company')} (${fd.get('country')})`;
+    const mailto = () => { const body = [...fd.entries()].map(([k, v]) => `${k.replace('_', ' ')}: ${v}`).join('\n'); location.href = `mailto:${d.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; };
+    const done = (m: string) => { okMsg.textContent = m; f.hidden = true; ok.hidden = false; ok.focus(); };
+    const btn = f.querySelector('button')!; btn.disabled = true;
+    if (!d.endpoint) { mailto(); done('Your email app has opened with the inquiry pre-filled — just press send. If nothing opened, email ' + d.email + '.'); return; }
+    try {
+      if (d.key) fd.append('access_key', d.key); fd.append('subject', subject);
+      const r = await fetch(d.endpoint, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
+      if (!r.ok) throw new Error(); done('We will reply to ' + fd.get('email') + ' shortly.');
+    } catch { err.hidden = false; btn.disabled = false; mailto(); }
+  });
+}
+</script>
+<style>
+.form{display:grid;gap:22px}.row2{display:grid;grid-template-columns:1fr 1fr;gap:22px}@media(max-width:640px){.row2{grid-template-columns:1fr}}
+.f{display:grid;gap:8px}label{font-size:.76rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--coffee-2)}
+input,select,textarea{font:inherit;font-size:1rem;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r);background:#fff;color:var(--ink);transition:border-color .2s,box-shadow .2s;width:100%}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px #b8894d26}
+small{display:none;color:#a33a2a;font-size:.82rem}.bad small{display:block}.bad input,.bad textarea{border-color:#a33a2a}
+.submit{display:flex;align-items:center;gap:22px;flex-wrap:wrap}.note{font-size:.85rem;color:var(--muted)}.err{color:#a33a2a;margin:0}
+.ok{text-align:center;padding:56px 24px;border:1px solid var(--line);background:#fff;border-radius:var(--r)}.ok h3{color:var(--coffee);margin:18px 0 10px}.ok p{color:var(--muted)}
+.tick{display:inline-grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--gold);color:#fff}.tick :global(svg){width:30px}
+</style>

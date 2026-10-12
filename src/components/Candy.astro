@@ -1,0 +1,20 @@
+---
+// Decorative SVG illustration of a wrapped coffee candy (no photo).
+interface Props { tone?: 'dark' | 'black' | 'gold' | 'cream'; label?: string; class?: string }
+const { tone = 'dark', label = '', class: cls = '' } = Astro.props;
+const c = { dark: ['#5a3a24', '#2a180d', '#d8b37a'], black: ['#2b2420', '#0f0b09', '#c9a46a'], gold: ['#c99a5b', '#7c5328', '#fff3dd'], cream: ['#e9d9c1', '#9b7651', '#5a3a24'] }[tone];
+const id = 'g' + Math.random().toString(36).slice(2, 7);
+---
+<svg class={cls} viewBox="0 0 320 200" role="img" aria-label={label || 'Illustration of a wrapped coffee candy'}>
+  <defs>
+    <radialGradient id={id} cx="38%" cy="32%" r="75%"><stop offset="0" stop-color={c[0]} /><stop offset="1" stop-color={c[1]} /></radialGradient>
+  </defs>
+  <path d="M70 100 L18 58 Q28 100 18 142 Z" fill={c[1]} opacity=".9" />
+  <path d="M250 100 L302 58 Q292 100 302 142 Z" fill={c[1]} opacity=".9" />
+  <path d="M30 70 L66 96 M28 100 H66 M30 130 L66 104 M290 70 L254 96 M292 100 H254 M290 130 L254 104" stroke={c[2]} stroke-width="1" opacity=".35" />
+  <ellipse cx="160" cy="100" rx="96" ry="64" fill={`url(#${id})`} />
+  <ellipse cx="128" cy="74" rx="42" ry="14" fill="#fff" opacity=".12" transform="rotate(-12 128 74)" />
+  <g transform="translate(160 100)" fill="none" stroke={c[2]} stroke-width="2" opacity=".85">
+    <ellipse rx="22" ry="30" transform="rotate(28)" /><path d="M-8 -26 Q6 0 -4 28" transform="rotate(28)" />
+  </g>
+</svg>

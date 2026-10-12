@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import InquiryForm from '../components/InquiryForm.astro';
+import Icon from '../components/Icon.astro';
+import Faq from '../components/Faq.astro';
+import { rep } from '../data/site';
+---
+<Base title="Contact & Inquiry" description="Send a wholesale, distribution or OEM inquiry for Ruiji Food Group sugar-free coffee candy to icerao, authorized export representative.">
+<PageHero eyebrow="Contact" title="Send an inquiry" lead="Share your market, products of interest and estimated volume. Every inquiry is handled personally." />
+<section class="section"><div class="wrap cg">
+  <aside class="reveal">
+    <div class="card">
+      <span class="eyebrow">Your contact</span>
+      <h2 class="nm">{rep.name}</h2><p class="ttl">{rep.title}</p>
+      <a class="mail" href={`mailto:${rep.email}`}><Icon name="mail" />{rep.email}</a>
+    </div>
+    <dl><div><dt>Manufacturer</dt><dd>Ruiji Food Group</dd></div><div><dt>Location</dt><dd>Torch Development Zone, Zhongshan, Guangdong, China</dd></div><div><dt>Inquiry types</dt><dd>Import & distribution · Retail chains · Private label / OEM · Hospitality & gifting</dd></div></dl>
+  </aside>
+  <div class="reveal"><InquiryForm /></div>
+</div></section>
+<section class="section cream"><div class="wrap fw"><div class="head"><span class="eyebrow">FAQ</span><h2>Before you inquire</h2></div><Faq /></div></section>
+</Base>
+<style>
+.cg{display:grid;grid-template-columns:.9fr 1.4fr;gap:72px;align-items:start}@media(max-width:900px){.cg{grid-template-columns:1fr;gap:48px}}
+.card{background:var(--coffee);color:#fff;padding:40px;border-radius:var(--r)}.nm{font-size:2.6rem}.ttl{color:#cdbfae;margin:8px 0 28px}
+.mail{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--gold-2);font-weight:500;padding-top:24px;border-top:1px solid #ffffff1f;word-break:break-all}.mail :global(svg){width:22px;flex:none}
+dl{margin:32px 0 0}dl div{padding:18px 0;border-bottom:1px solid var(--line)}dt{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600}dd{margin:6px 0 0;color:var(--muted)}.fw{max-width:920px}
+</style>

@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ProductCard from '../components/ProductCard.astro';
+import CertStrip from '../components/CertStrip.astro';
+import Cta from '../components/Cta.astro';
+import { products, brands, claimNote } from '../data/site';
+---
+<Base title="Coffee Candy Products" description="Sugar-free coffee candy from X-it, I'MINT and Rejee by Ruiji Food Group — available for wholesale, distribution and private label.">
+<PageHero eyebrow="Products" title="Sugar-free coffee candy range" lead="Representative coffee candy products from Ruiji Food Group's brands. Specifications, shelf life, packaging options and MOQ are provided on request." />
+<CertStrip />
+<section class="section"><div class="wrap"><div class="grid g4">{products.map((p) => <ProductCard p={p} />)}</div><p class="fn">{claimNote}</p></div></section>
+<section class="section cream"><div class="wrap">
+  <div class="head reveal"><span class="eyebrow">Brand portfolio</span><h2>Four brands, one sugar-free focus.</h2><p>The group's portfolio spans 200+ products including mints, chewing gum, coffee candy, herbal lozenges, probiotic tablets and soft candy.</p></div>
+  <div class="grid g4">{brands.map((b) => <div class="br reveal"><h3>{b.name}</h3><p>{b.text}</p></div>)}</div>
+</div></section>
+<section class="section"><div class="wrap info reveal">
+  <div><span class="eyebrow">Specifications</span><h2>Need specs, samples or pricing?</h2></div>
+  <div><p>Product specifications, shelf life, carton configuration, MOQ and pricing vary by product and market. Send your requirements and receive a tailored proposal.</p><a class="btn btn-dark" href="/contact/">Request product details</a></div>
+</div></section>
+<Cta />
+</Base>
+<style>
+.fn{font-size:.8rem;color:var(--muted);margin-top:28px}.br{border-top:2px solid var(--gold);padding-top:24px}.br h3{color:var(--coffee);font-size:1.7rem;margin-bottom:10px}.br p{color:var(--muted);font-size:.95rem}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end}.info p{color:var(--muted);font-size:1.08rem;margin-bottom:28px}@media(max-width:860px){.info{grid-template-columns:1fr;gap:20px}}
+</style>
